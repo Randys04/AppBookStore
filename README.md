@@ -1,0 +1,3 @@
+## Descripción del proyecto
+------------
+Este es un sistema de gestión de libros diseñado para bibliotecas, construido utilizando el patrón de arquitectura model-view-controller (mvc) con .net y c#. Este sistema permite a los usuarios gestionar de manera eficiente la colección de libros de una biblioteca, incluyendo la adición, actualización, eliminación y consulta de libros. además, proporciona funcionalidades para la gestión de categorías, facilitando la organización y el acceso a la información de los libros. el sistema utiliza Entity Framework (EF) para la interacción con la base de datos, garantizando una gestión de datos robusta y eficiente.
