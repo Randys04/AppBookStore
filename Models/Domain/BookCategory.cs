@@ -11,6 +11,8 @@ namespace AppBookStore.Models.Domain
     {
         public int Id { get; set; }
         public int BookId { get; set; }
+        public Book? Book { get; set; } // Ancla
         public int CategoryId { get; set; }
+        public Category? Category { get; set; } // Ancla
     }
 }

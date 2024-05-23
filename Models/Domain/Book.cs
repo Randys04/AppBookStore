@@ -16,6 +16,8 @@ namespace AppBookStore.Models.Domain
         public string? CoverImage{ get; set;}
         [Required]       
         public string? Author{ get; set;}
+        public virtual ICollection<Category>? CategoryRelationList { get; set; }
+        public virtual ICollection<BookCategory>? BookCatagoryRelationList { get; set; }
         
     }
 }

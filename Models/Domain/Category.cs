@@ -12,5 +12,7 @@ namespace AppBookStore.Models.Domain
         [Required]
         public int Id { get; set; }
         public string? Name { get; set; }
+        public virtual ICollection<Book>? BookRelationList { get; set; }
+        public virtual ICollection<BookCategory>? BookCatagoryRelationList { get; set; }
     }
 }
