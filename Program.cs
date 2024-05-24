@@ -1,7 +1,19 @@
+using AppBookStore.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// inicializando la base de datos e imprimimos en consola todas las consultas a la base de datos
+builder.Services.AddDbContext<DatabaseContext> (opt => {
+    opt.LogTo(Console.WriteLine, new [] {
+        DbLoggerCategory.Database.Command.Name},
+        LogLevel.Information).EnableSensitiveDataLogging();
+
+        opt.UseSqlite(builder.Configuration.GetConnectionString("SqliteDatabase"));
+});
 
 var app = builder.Build();
 
