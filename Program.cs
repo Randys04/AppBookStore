@@ -1,4 +1,6 @@
 using AppBookStore.Models;
+using AppBookStore.Models.Domain;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,11 @@ builder.Services.AddDbContext<DatabaseContext> (opt => {
         opt.UseSqlite(builder.Configuration.GetConnectionString("SqliteDatabase"));
 });
 
+// Injeccion
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<DatabaseContext>()
+    .AddDefaultTokenProviders();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,11 +36,31 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication(); // Hace posible trabajar con el login y la generacion de tokens o cokies
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+
+using (var enviroment = app.Services.CreateScope()) // Carga la data master
+{
+    try
+    {
+        var services = enviroment.ServiceProvider;
+        var context = services.GetRequiredService<DatabaseContext>();
+        var userManager = services.GetRequiredService<UserManager<AppUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        await context.Database.MigrateAsync(); // ejecuta los archivos de migracion
+
+        await LoadDatabase.InsertData(context, userManager, roleManager);
+    }
+    catch (System.Exception)
+    {
+        Console.WriteLine("There was an error trying to load the data");
+    }
+};
 
 app.Run();
