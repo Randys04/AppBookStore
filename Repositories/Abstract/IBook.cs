@@ -12,7 +12,7 @@ namespace AppBookStore.Repositories.Abstract
         bool Add(Book book);
         bool Update(Book book);
         Book GetById(int id);
-        bool Delete(Book book);
+        bool Delete(int id);
         BookListVm List(string term="", bool paging = false, int currentPage = 0);
         List<int> GetCategoriesByBook(int bookId);
     }
