@@ -1,5 +1,7 @@
 using AppBookStore.Models;
 using AppBookStore.Models.Domain;
+using AppBookStore.Repositories.Abstract;
+using AppBookStore.Repositories.Implementation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IBookService, BookService>();
 
 // inicializando la base de datos e imprimimos en consola todas las consultas a la base de datos
 builder.Services.AddDbContext<DatabaseContext> (opt => {
