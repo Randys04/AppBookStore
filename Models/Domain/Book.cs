@@ -23,6 +23,8 @@ namespace AppBookStore.Models.Domain
 
         [NotMapped] // Sirve para que no se toma en cuenta este atributo para el mapeo en la tabla de la base de datos
         public List<int>? Categories { get; set; }
+        [NotMapped]
+        public string? CategoriesNames { get; set; }
         
     }
 }
