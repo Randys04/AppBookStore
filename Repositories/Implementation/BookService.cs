@@ -110,9 +110,9 @@ namespace AppBookStore.Repositories.Implementation
                 string categoriesNames = string.Join("-", categories); // se pasa la cadena de categorias a un solo string
                 book.CategoriesNames = categoriesNames;
             }
-            
+
             data.BookList = list.AsQueryable();
-            return null!;
+            return data;
         }
 
         public bool Update(Book book)
