@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using AppBookStore.Models.Domain;
 using AppBookStore.Repositories.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -23,6 +24,17 @@ namespace AppBookStore.Controllers
         {
             var books = _bookService.List(term, true, currentPage);
             return View(books);
+        }
+
+        public IActionResult BookDetails(int bookId)
+        {
+            Book book = _bookService.GetById(bookId);
+            return View(book);
+        }
+
+        public IActionResult About()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
