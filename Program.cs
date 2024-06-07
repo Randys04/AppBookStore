@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
 
 // inicializando la base de datos e imprimimos en consola todas las consultas a la base de datos
 builder.Services.AddDbContext<DatabaseContext> (opt => {
