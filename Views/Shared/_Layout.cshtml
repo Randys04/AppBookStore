@@ -1,4 +1,6 @@
-
+@{
+    string username = User.Identity!.Name!;
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,25 +20,32 @@
 </head>
 <body>
     <nav class="nav-bar">
-      <div class="logo">
-         libreria store
-      </div>
-      <ul class="nav-link">
-          <li><a class="active" href="/index.html">Inicio</a></li>
-          <li><a href="/Home/About">About</a></li>
-          <li>
-            <a href="#">Admin <i class="fa fa-caret-down"></i></a>
+        <div class="logo">
+            libreria store
+        </div>
+        <ul class="nav-link">
+            <li><a class="active" href="/index.html">Inicio</a></li>
+            <li><a href="/Home/About">About</a></li>
+
+            @if(!string.IsNullOrEmpty(username))
+            {
+                <li>
+                    <a href="#">Admin <i class="fa fa-caret-down"></i></a>
+                    
+                    <ul class="dropdown-nav-link">
+                        <li><a href="/forms.html">Categorias</a></li>
+                        <li><a href="/table.html">Libros</a></li>
+                        <li><a href="/UserAuthentication/Logout">Logout</a></li>
+                    </ul>
+                </li>
+            }
             
-            <ul class="dropdown-nav-link">
-                <li><a href="/forms.html">Form</a></li>
-                <li><a href="/table.html">Table</a></li>
-                <li><a href="/movie-detail.html">Libro Detalle</a></li>
-                <li><a href="#">Link 4</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Login</a></li>
-      </ul>
+            @if(string.IsNullOrEmpty(username))
+            {
+                    <li><a href="/UserAuthentication/Login">Login</a></li>
+            }
+            
+        </ul>
     </nav>
 
     <div class="container">
@@ -44,7 +53,7 @@
     </div>
 
     <footer>
-        &#169; Programacion Web y Diseno 
+        &#169; Randys Tech
     </footer>
 </body>
 </html>
