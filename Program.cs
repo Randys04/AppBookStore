@@ -12,6 +12,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
+builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 // inicializando la base de datos e imprimimos en consola todas las consultas a la base de datos
 builder.Services.AddDbContext<DatabaseContext> (opt => {
