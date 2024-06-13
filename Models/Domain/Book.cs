@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace AppBookStore.Models.Domain
 {
@@ -25,6 +27,12 @@ namespace AppBookStore.Models.Domain
         public List<int>? Categories { get; set; }
         [NotMapped]
         public string? CategoriesNames { get; set; }
+        [NotMapped]
+        public IFormFile? ImageFile { get; set; }
+        [NotMapped]
+        public IEnumerable<SelectListItem>? CategoriesList { get; set; }
+        [NotMapped]
+        public MultiSelectList? MultiCategoriesSelectList { get; set; }
         
     }
 }

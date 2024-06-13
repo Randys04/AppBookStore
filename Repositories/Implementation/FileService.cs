@@ -64,7 +64,7 @@ namespace AppBookStore.Repositories.Implementation
                 var stream = new FileStream(fileWithPath, FileMode.Create); // Crea instancia de stream
                 imgFile.CopyTo(stream); // Lo carga en el directorio
 
-                return new Tuple<int, string>(1, "Image saved successfully");
+                return new Tuple<int, string>(1, newFileName);
             }
 
             catch (System.Exception)
