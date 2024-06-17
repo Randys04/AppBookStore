@@ -65,7 +65,7 @@ namespace AppBookStore.Controllers
             book.CategoriesList = _categoryService.List()
                 .Select(a => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {Text = a.Name, Value = a.Id.ToString()});
                 
-            return View();
+            return View(book);
         }
 
         public IActionResult Edit(int id)
