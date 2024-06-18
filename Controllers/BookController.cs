@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using AppBookStore.Models.Domain;
 using AppBookStore.Repositories.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 
 namespace AppBookStore.Controllers
 {
+    [Authorize]
     public class BookController : Controller
     {
 
