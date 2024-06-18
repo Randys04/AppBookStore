@@ -1,0 +1,41 @@
+@model AppBookStore.Models.DTO.BookListVm
+@{
+
+}
+
+<div class="tbl-container">
+    <h2>Administracion de libros</h2>
+    
+    <table>
+        <tr>
+            <th>Titulo</th>
+            <th>Categoria</th>
+            <th>Fecha y publicación</th>
+            <th>Imagen</th>
+            <th>Autor</th>
+            <th>Acciones</th>
+        </tr>
+
+        @foreach(var item in Model.BookList!)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.CategoriesNames</td>
+                <td>@item.CreateDate</td>
+                <td><img style="height: 60px; width: 80px;" src="/Uploads/@item.CoverImage" alt=""></td>
+                <td>@item.Author</td>
+                <td>
+                    <a href="/Book/Edit?id=@item.Id" class="btn btn-default">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="/Book/Delete?id=@item.Id" onclick="return window.confirm('¿Estas seguro?')" class="btn btn-danger">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="input-container">
+        <a href="/Book/Add" class="btn btn-sec">Añadir libro</a>
+    </div>
+</div>

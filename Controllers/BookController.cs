@@ -80,7 +80,8 @@ namespace AppBookStore.Controllers
 
         public IActionResult BooksList()
         {
-            return View();
+            var books = _bookService.List();
+            return View(books);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
