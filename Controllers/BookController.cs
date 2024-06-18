@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AppBookStore.Models.Domain;
 using AppBookStore.Repositories.Abstract;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 
 namespace AppBookStore.Controllers
@@ -70,11 +71,54 @@ namespace AppBookStore.Controllers
 
         public IActionResult Edit(int id)
         {
-            return View();
+            var editBook = _bookService.GetById(id);
+            var bookCategories = _bookService.GetCategoriesByBook(id);
+            var multiSelectListCategories = new MultiSelectList(_categoryService.List(), "Id", "Name", bookCategories);
+
+            editBook.MultiCategoriesSelectList = multiSelectListCategories;
+            return View(editBook);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Book editBook)
+        {
+            var bookCategories = _bookService.GetCategoriesByBook(editBook.Id);
+            var multiSelectListCategories = new MultiSelectList(_categoryService.List(), "Id", "Name", bookCategories);
+
+            editBook.MultiCategoriesSelectList = multiSelectListCategories;
+
+            if(!ModelState.IsValid)
+            {
+                return View (editBook);
+            }
+            
+            if(editBook.ImageFile != null)
+            {
+                var fileResult = _fileService.SaveImage(editBook.ImageFile);
+                if(fileResult.Item1 == 0)
+                {
+                    TempData["msg"] = "La imagen no fue guardada";
+                }
+
+                var imageName = fileResult.Item2;
+                editBook.CoverImage = imageName;
+            }
+
+             var result = _bookService.Update(editBook);
+
+            if(!result)
+            {
+                TempData["msg"] = "No se puedo actualizar el libro";
+                return View (editBook);
+            }
+
+            TempData["msg"] = "Libro actualizado";
+            return View (editBook);
         }
 
         public IActionResult Delete(int id)
         {
+            _bookService.Delete(id);
             return RedirectToAction(nameof(BooksList));
         }
 
