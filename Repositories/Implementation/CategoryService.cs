@@ -17,9 +17,57 @@ namespace AppBookStore.Repositories.Implementation
             this.dbContext = dbContext;
         }
 
+        public bool Add(Category category)
+        {
+            try
+            {
+                dbContext.Add(category);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                var categoryToDelete = GetById(id);
+                dbContext.Remove(categoryToDelete);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public Category GetById(int id)
+        {
+            return dbContext.Categories.Find(id)!;
+        }
+
         public IQueryable<Category> List()
         {
             return dbContext.Categories.AsQueryable();
+        }
+
+        public bool Update(Category category)
+        {
+            try
+            {
+                dbContext.Update(category);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

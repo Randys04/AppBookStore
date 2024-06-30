@@ -9,5 +9,9 @@ namespace AppBookStore.Repositories.Abstract
     public interface ICategoryService
     {
         IQueryable<Category> List();
+        bool Add(Category category);
+        bool Update(Category category);
+        Category GetById(int id);
+        bool Delete(int id);
     }
 }
