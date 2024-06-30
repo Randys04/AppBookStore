@@ -54,7 +54,7 @@ namespace AppBookStore.Repositories.Implementation
                 dbContext.BooksCategories.RemoveRange(bookCategories);
                 dbContext.Books.Remove(bookToDelete);
                 dbContext.SaveChanges();
-                return false;
+                return true;
             }
             catch (System.Exception)
             {
