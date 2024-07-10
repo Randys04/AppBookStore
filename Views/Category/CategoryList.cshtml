@@ -1,0 +1,33 @@
+@model AppBookStore.Models.DTO.CategoryListVm
+@{
+
+}
+
+<div class="tbl-container">
+    <h2>Administracion de categorias</h2>
+    
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+
+        @foreach(var item in Model.CategoryList!)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <a href="/Category/Edit?id=@item.Id" class="btn btn-default">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="/Category/Delete?id=@item.Id" onclick="return window.confirm('¿Estas seguro?')" class="btn btn-danger">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="input-container">
+        <a href="/Category/Add" class="btn btn-sec">Añadir categoria</a>
+    </div>
+</div>
