@@ -30,7 +30,7 @@ namespace AppBookStore.Controllers
         [HttpPost]
         public IActionResult Add(Book book)
         {
-            book.CategoriesList = _categoryService.List()
+            book.CategoriesList = _categoryService.ListQueryable()
                 .Select(a => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {Text = a.Name, Value = a.Id.ToString()});
                 
             if(!ModelState.IsValid)
@@ -65,7 +65,7 @@ namespace AppBookStore.Controllers
         public IActionResult Add()
         {
             var book = new Book();
-            book.CategoriesList = _categoryService.List()
+            book.CategoriesList = _categoryService.ListQueryable()
                 .Select(a => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {Text = a.Name, Value = a.Id.ToString()});
                 
             return View(book);
@@ -75,7 +75,7 @@ namespace AppBookStore.Controllers
         {
             var editBook = _bookService.GetById(id);
             var bookCategories = _bookService.GetCategoriesByBook(id);
-            var multiSelectListCategories = new MultiSelectList(_categoryService.List(), "Id", "Name", bookCategories);
+            var multiSelectListCategories = new MultiSelectList(_categoryService.ListQueryable(), "Id", "Name", bookCategories);
 
             editBook.MultiCategoriesSelectList = multiSelectListCategories;
             return View(editBook);
@@ -85,7 +85,7 @@ namespace AppBookStore.Controllers
         public IActionResult Edit(Book editBook)
         {
             var bookCategories = _bookService.GetCategoriesByBook(editBook.Id);
-            var multiSelectListCategories = new MultiSelectList(_categoryService.List(), "Id", "Name", bookCategories);
+            var multiSelectListCategories = new MultiSelectList(_categoryService.ListQueryable(), "Id", "Name", bookCategories);
 
             editBook.MultiCategoriesSelectList = multiSelectListCategories;
 
