@@ -5,7 +5,7 @@ This is a book management system designed for libraries, built using the model-v
 
 ## Main Features
 - Book Management: Users can create, delete, edit, and display books.
-- Category Management: Users can create, delete, edit, and display book categories. **(In development)**
+- Category Management: Users can create, delete, edit, and display book categories.
 - Authentication: Users can register and log in to access the application's functionalities.
 - MVC Design: Implements the Model-View-Controller design pattern for clear separation of responsibilities and maintainable code.
 - Entity Framework: Uses Entity Framework for data management, simplifying CRUD (Create, Read, Update, Delete) operations and providing intuitive mapping between data models and the database.
