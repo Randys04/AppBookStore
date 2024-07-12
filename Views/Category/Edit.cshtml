@@ -1,0 +1,22 @@
+@model AppBookStore.Models.Domain.Category
+@{
+    
+}
+
+<form asp-action="Edit" method="post" class="w-40">
+    <h2>Editar Categoria</h2>
+    <input type="hidden" class="input" asp-for="Id">
+
+    <div class="input-container">
+        <label asp-for="Name" class="w-40">Nombre de la categoria</label>
+        <input type="text" class="input" asp-for="Name">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div class="input-container">
+        <button class="btn btn-default">Guardar</button>
+        <a class="btn btn-sec" href="/Category/CategoryList">Ver Lista</a>
+    </div>
+</form>

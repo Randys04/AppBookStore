@@ -58,6 +58,32 @@ namespace AppBookStore.Controllers
             return View(categoryEdit);
         }
 
+        [HttpPost]
+        public IActionResult Edit(Category categoryEdit)
+        {
+            try
+            {
+                if(!ModelState.IsValid)
+                {
+                    return View(categoryEdit);
+                }
+
+                var result =_categoryService.Update(categoryEdit);
+                if(result)
+                {
+                    TempData["msg"] = "Category saved successfully";
+                    return RedirectToAction(nameof(Add));
+                }
+                
+                TempData["msg"] = "Error saving the category";
+                return RedirectToAction(nameof(Add));
+            }
+            catch (System.Exception)
+            {
+                return View();
+            }
+        }
+
         public IActionResult Delete(int id)
         {
             _categoryService.Delete(id);       
